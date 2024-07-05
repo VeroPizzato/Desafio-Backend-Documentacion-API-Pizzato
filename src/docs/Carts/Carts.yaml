@@ -26,6 +26,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Cart'
+        "400":
+          description: Carrito inválido 
+        "401":
+          description: Usuario no logueado
+        "403":
+          description: Usuario no autorizado     
+        "404":
+          description: Carrito no existe   
         "500":
           description: Error en el servidor
 
@@ -48,6 +56,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Cart'
+        "400":
+          description: Carrito inválido 
         "404":
           description: El carrito no existe
         "500":
@@ -86,8 +96,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Cart'
+        "400":
+          description: Carrito inválido 
+        "401":
+          description: Usuario no logueado
+        "403":
+          description: Usuario no autorizado 
         "404":
-          description: El carrito o el producto no existe
+          description: El carrito no existe
         "500":
           description: Error en el servidor
     delete:
@@ -106,10 +122,16 @@ paths:
           description: El carrito fue eliminado satisfactoriamente
           content:
             application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Cart'
+              schema:                
+                $ref: '#/components/schemas/Cart'
+        "400":
+          description: Carrito inválido 
+        "401":
+          description: Usuario no logueado
+        "403":
+          description: Usuario no autorizado 
+        "404":
+          description: El carrito no existe
         "500":
           description: Error en el servidor
 
@@ -132,12 +154,18 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        "201":
           description: Producto agregado exitosamente al carrito
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Cart'
+        "400":
+          description: Carrito o producto inválido 
+        "401":
+          description: Usuario no logueado
+        "403":
+          description: Usuario no autorizado 
         "404":
           description: El carrito o el producto no existe
         "500":
@@ -166,6 +194,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Cart'
+        "400":
+          description: Carrito o producto inválido
+        "401":
+          description: Usuario no logueado
+        "403":
+          description: Usuario no autorizado 
         "404":
           description: El carrito o el producto no existe
         "500":
@@ -204,9 +238,41 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Cart'
+        "400":
+          description: Carrito o producto inválido 
+        "401":
+          description: Usuario no logueado
+        "403":
+          description: Usuario no autorizado 
+        "404":
+          description: El carrito o el producto no existe
         "500":
           description: Error en el servidor
-
+  /api/cart/{cid}/purchase:  
+    get:
+      summary: Genera un ticket de compra para un carrito específico
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: ID del carrito
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Ticket de compra generado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ticket'
+        "400":
+          description: Carrito inválido         
+        "404":
+          description: El carrito no existe
+        "500":
+          description: Error Interno
 components:
   schemas:
     Cart:
@@ -235,3 +301,29 @@ components:
             quantity: 1
           - _id: '660c2e59eae06b4c3ff95029'
             quantity: 1
+    Ticket:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: ID del ticket          
+        code:
+          type: string
+          description: codigo       
+        purchase_datetime:
+          type: string
+          format: date-time
+          description: Fecha de la compra
+        amount: 
+          type: number
+          description: Monto total de la compra
+        purchaser:
+          type: string
+          description: Correo del usuario asociado al carrito
+      example:
+        _id: '665dc6ebfc7b291cc831f6e3'
+        code: '1717421803479'
+        purchase_datetime: 2024-06-03T13:35:25.723+00:00
+        amount: 1264997
+        purchaser: "verizzato@gmail.com"
+

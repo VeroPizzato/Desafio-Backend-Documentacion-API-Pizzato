@@ -52,7 +52,7 @@ module.exports = {
             next()
         }
         catch {
-            return res.status(400).json({ error: "No existe el carrito." })
+            return res.status(400).json({ error: "Carrito invalido." })
         }
     }
 }
