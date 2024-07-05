@@ -30,10 +30,8 @@ paths:
           description: Operación exitosa, el producto fue agregado correctamente
           content:
             application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#components/schemas/Product'
+              schema:                
+                $ref: '#components/schemas/Product'
         "400":
           description: Producto inválido
         "401":
