@@ -8,6 +8,8 @@ const cookieParser = require('cookie-parser')
 const config = require('./config/config')
 const { Product: ProductDAO } = require('./dao')
 const { ProductsService } = require('./services/products.service')
+const swaggerJSDoc = require('swagger-jsdoc')
+const { serve, setup } = require('swagger-ui-express')
 
 const CartsRouter = require('./routes/carts.router')
 const cartsRouter = new CartsRouter().getRouter()
@@ -34,6 +36,20 @@ const { errorHandler } = require('./services/errors/errorHandler')
 const { addLogger } = require('../src/utils/logger')
 
 const app = express()
+
+const swaggerOptions = {
+    definition: {
+        openapi: '3.0.1',
+        info: {
+            title: 'Documentación de E-commerce',
+            description: 'API backend E-commerce'
+        }
+    },
+    apis: [`${__dirname}/docs/**/*.yaml`]
+}
+
+const specs = swaggerJSDoc(swaggerOptions)
+app.use('/apidocs', serve, setup(specs))
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
