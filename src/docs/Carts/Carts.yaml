@@ -309,7 +309,7 @@ components:
           description: ID del ticket          
         code:
           type: string
-          description: codigo       
+          description: Codigo del ticket        
         purchase_datetime:
           type: string
           format: date-time
