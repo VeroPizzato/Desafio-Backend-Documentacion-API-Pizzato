@@ -12,9 +12,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#components/schemas/Product'
-        "400":
-          description: Pagina no existente 
+                  $ref: '#components/schemas/Product'        
         "500":
           description: Error en el servidor 
     post:
@@ -37,7 +35,9 @@ paths:
                 items:
                   $ref: '#components/schemas/Product'
         "400":
-          description: Request inválido
+          description: Producto inválido
+        "403":
+          description: No cuenta con los permisos adecuados
         "500":
           description: Error en el servidor
 
@@ -52,7 +52,7 @@ paths:
           required: true
           description: ID del producto
           schema:
-            $type: String
+            $type: string
       responses:
         "200":
           description: Operación exitosa, devuelve el producto encontrado
@@ -74,7 +74,7 @@ paths:
         requiered: true
         description: ID del producto a actualizar
         schema:
-          $type: String
+          $type: string
       requestBody:
         required: true
         content:
@@ -90,6 +90,8 @@ paths:
                 type: array
                 items:
                   $ref: '#components/schemas/Product'
+        "403":
+          description: No cuenta con los permisos adecuados
         "500":
           description: Error en el servidor
     delete:
@@ -102,7 +104,7 @@ paths:
         requiered: true
         description: ID del producto a borrar
         schema:
-          $type: String
+          $type: string
       responses:
         "200":
           description: El producto fue eliminado satisfactoriamente
@@ -112,6 +114,8 @@ paths:
                 type: array
                 items:
                   $ref: '#components/schemas/Product'
+        "403":
+          description: No cuenta con los permisos adecuados
         "500":
           description: Error en el servidor
 
@@ -124,31 +128,31 @@ components:
           type: string
           description: ID del producto autogenerado por Mongo
         title:
-          type: String
+          type: string
           description: Titulo del Producto
         description:
-          type: String
+          type: string
           description: Descripción detallada del Producto
         price:
-          type: Number
+          type: number
           description: Precio del Producto
         thumbnail:
-          type: Array
+          type: array
           description: Listado de paths de las fotos del Producto
         code:
-          type: String
+          type: string
           description: Código Interno del Producto, este campo debe ser único
         stock:
-          type: Number
+          type: number
           description: Stock Actual del Producto
         status:
-          type: Boolean
+          type: boolean
           description: Estado del Producto
         category:
-          type: String
+          type: string
           description: Categoría del Producto       
         owner:
-          type: String
+          type: string
           description: Creador del Producto, por default es el Administrador       
       example:
         _id: "660c2e59eae06b4c3ff95029"
@@ -165,34 +169,34 @@ components:
         owner: admin     
   requestBodies:
     addProduct:
-      type: String
+      type: string
       properties: 
         title:
-          type: String
+          type: string
           description: Titulo del Producto
         description:
-          type: String
+          type: string
           description: Descripción detallada del Producto
         price:
-          type: Number
+          type: number
           description: Precio del Producto
         thumbnail:
-          type: Array
+          type: array
           description: Listado de paths de las fotos del Producto
         code:
-          type: String
+          type: string
           description: Código Interno del Producto, este campo debe ser único
         stock:
-          type: Number
+          type: number
           description: Stock Actual del Producto
         status:
-          type: Boolean
+          type: boolean
           description: Estado del Producto
         category:
-          type: String
+          type: string
           description: Categoría del Producto       
         owner:
-          type: String
+          type: string
           description: Creador del Producto, por default es el Administrador  
       example:
         title: Memoria RAM ValueRAM color verde 8GB 1 Kingston KVR26N19S8/8
@@ -207,34 +211,34 @@ components:
         category: componente
         owner: admin  
     updateProduct:
-      type: String
+      type: string
       properties: 
         title:
-          type: String
+          type: string
           description: Titulo del Producto
         description:
-          type: String
+          type: string
           description: Descripción detallada del Producto
         price:
-          type: Number
+          type: number
           description: Precio del Producto
         thumbnail:
-          type: Array
+          type: array
           description: Listado de paths de las fotos del Producto
         code:
-          type: String
+          type: string
           description: Código Interno del Producto, este campo debe ser único
         stock:
-          type: Number
+          type: number
           description: Stock Actual del Producto
         status:
-          type: Boolean
+          type: boolean
           description: Estado del Producto
         category:
-          type: String
+          type: string
           description: Categoría del Producto       
         owner:
-          type: String
+          type: string
           description: Creador del Producto, por default es el Administrador
       example:
         title: Notebook GIGABYTE G5 KE Intel i5-12500H | RTX 3060 | 16GB DDR4 | 512GB NVMe | 15” FHD 144Hz
