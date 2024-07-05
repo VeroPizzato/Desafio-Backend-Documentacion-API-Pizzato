@@ -86,10 +86,8 @@ paths:
           description: El producto fue actualizado correctamente
           content:
             application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#components/schemas/Product'
+              schema:                
+                $ref: '#components/schemas/Product'
         "403":
           description: No cuenta con los permisos adecuados
         "500":
@@ -110,10 +108,8 @@ paths:
           description: El producto fue eliminado satisfactoriamente
           content:
             application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#components/schemas/Product'
+              schema:                
+                $ref: '#components/schemas/Product'
         "403":
           description: No cuenta con los permisos adecuados
         "500":
